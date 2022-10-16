@@ -21,7 +21,7 @@ class Demotivator:
             self.__image.width+(self.__x_start*2), self.__image.height+(self.__y_start*2)+200))
         template.paste(self.__image, self.__get_coords(
             self.__image))  # paste image to template
-        Text(Font(font_filename="times.ttf", size=45, font_y=self.__image.height+self.__y_start+70)).draw(
+        Text(Font(font_filename="Symbola.ttf", size=45, font_y=self.__image.height+self.__y_start+70)).draw(
             template, self.__text)  # paste text to template
 
         return template

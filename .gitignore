@@ -3,3 +3,4 @@ __pycache__/
 .env.toml
 .DS_Store
 first
+a.py

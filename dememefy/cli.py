@@ -15,6 +15,7 @@ def _parse_args():
         "--service", "-s",
         dest="service",
         type=str,
+        required=True,
         choices=SERVICES.keys(),
         help="Target Service")
     parser.add_argument(
