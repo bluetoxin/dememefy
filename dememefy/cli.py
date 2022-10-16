@@ -107,4 +107,8 @@ def main():
 
     for i in range(amount):
         text, picture = service.get_post()
-        save_demotivator(picture, text, f"{i+1}_{args.destination}", args.open)
+        try:
+            filename, extension = args.destination.split(".")
+            save_demotivator(picture, text, f"{filename}{i+1}.{extension}", args.open)  # noqa
+        except ValueError as error:
+            print(f"Destination filename set wrong. Error: {error}")
