@@ -60,4 +60,5 @@ def main():
     service = service_name(**kwargs)
     text, picture = service.get_post()
     demotivator = Demotivator(image=picture, text=text, x_start=75, y_start=45)
-    demotivator.create()
+    picture = demotivator.create()
+    picture.show()

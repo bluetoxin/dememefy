@@ -2,6 +2,8 @@ from typing import Tuple
 
 from PIL import Image
 
+from dememefy.text import Font, Text
+
 
 class Demotivator:
     def __init__(self, image: Image.Image, text: str, x_start: int, y_start: int):
@@ -19,7 +21,10 @@ class Demotivator:
             self.__image.width+(self.__x_start*2), self.__image.height+(self.__y_start*2)+200))
         template.paste(self.__image, self.__get_coords(
             self.__image))  # paste image to template
-        template.show()
+        Text(Font(font_filename="times.ttf", size=45, font_y=self.__image.height+self.__y_start+70)).draw(
+            template, self.__text)  # paste text to template
+
+        return template
 
     def __get_coords(self, image: Image.Image) -> Tuple[int, int, int, int]:
         return (self.__x_start, self.__y_start, image.width+self.__x_start, image.height+self.__y_start)
