@@ -1,6 +1,6 @@
 # dememefy
 
-**dememefy** is a lightweight utility for creating demotivators
+**dememefy** is a lightweight utility for creating demotivators from your own images or feed of popular social networks
 
 * [Installation](#installation)
 * [Supported Media](#supported-media)
@@ -18,11 +18,18 @@ pip install dememefy
 
 ## Usage
 
-This utility parses social networks and makes memes from their feeds more fun. So for using this util you need to generate tokens for parsing and pass them it to the utility. There are two ways to pass credentials: keys and toml file. The second one is more convenient tho. So, first you need to generate correct data then set the data in the config file and use a pipeline to pass it to the utility.
+In "plain" mode you got to specify only image and text. 
 
 ```
-$ cat <config.toml> | dememefy -s reddit
+$ cat pic1.jpg | dememefy --text "Is It Alive?"  
 ```
+
+In "social network" mode the utility parses specified social network and makes memes from feed more fun. So, first you need to generate correct credentials then set them in the config toml-file (you may see "config.toml.example" for template) and pass filename and service to the utility.
+
+```
+$ dememefy -s reddit -c config.toml
+```
+
 ## FAQ 
 
 **How to get credentials?**
@@ -47,4 +54,4 @@ Copy all data to config.toml file
 
 <hr>
 
-<h6> This software is under BSD License, so you can do what you want. I mean, copy, modify, make money on it, literally everything. Contributions are welcome :)</h6>
+<p> This software is under BSD License, so you can do what you want. I mean, copy, modify, make money on it, literally everything. Contributions are also welcome :)</p>
