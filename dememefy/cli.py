@@ -23,6 +23,18 @@ def _parse_args():
         choices=SERVICES.keys(),
         help="Target Service.")
     parser.add_argument(
+        "--save-to", "-st",
+        type=str,
+        default="result.png",
+        dest="destination",
+        help="Destination for demotivator"
+    )
+    parser.add_argument(
+        "--open", "-o",
+        action="store_true",
+        help="Open output intentionally"
+    )
+    parser.add_argument(
         "image",
         type=FileType("rb"),
         nargs="?",
@@ -42,11 +54,16 @@ def _parse_args():
     return parser.parse_args()
 
 
-def make_demotivator(picture: Image.Image, text: str):
+def save_demotivator(picture: Image.Image, text: str, filename: str, open: bool):
     demotivator = Demotivator(
         image=picture, text=text, x_start=75, y_start=45)
     picture = demotivator.create()
-    picture.show()
+    picture.save(filename)
+    if open:
+        try:
+            picture.show()
+        except OSError as error:
+            print(f"Can't open generated output. Error: {error}.")
 
 
 def main():
@@ -58,7 +75,7 @@ def main():
                 "In plain mode you need to set both text and image.")
         with args.image as image:
             picture = Image.open(io.BytesIO(image.read()))
-        make_demotivator(picture, args.text)
+        save_demotivator(picture, args.text, args.destination, args.open)
         return
 
     try:
@@ -88,6 +105,6 @@ def main():
     except:
         amount = 1
 
-    for _ in range(amount):
+    for i in range(amount):
         text, picture = service.get_post()
-        make_demotivator(picture, text)
+        save_demotivator(picture, text, f"{i+1}_{args.destination}", args.open)

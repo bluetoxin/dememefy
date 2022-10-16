@@ -3,3 +3,8 @@ __pycache__/
 config.toml
 .DS_Store
 pic1.jpg
+result.png
+dist/
+build/
+dememefy.egg-info/
+.pypirc

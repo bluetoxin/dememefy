@@ -30,25 +30,35 @@ In "social network" mode the utility parses specified social network and makes m
 $ dememefy -s reddit -c config.toml
 ```
 
+**Flags:**
+
+`--open/-o`
+
+Force open generated demotivator(s). Disabled by default because it won't work for example inside Docker.
+
+`--save-to/-st`
+
+Path to save the generated demotivator(s).
+
 ## FAQ 
 
 **How to get credentials?**
 
-<h1 align="center">
+<p align="center">
 <img src="https://miro.medium.com/max/1400/1*GQ8IREDENnkCRQT3VS55mQ.png">
-</h1><br>
+</p><br>
 
 For Reddit you need to create an "another app".
 
-<h1 align="center">
+<p align="center">
 <img src="https://miro.medium.com/max/1400/1*ssLYczSLGzfm6SPM7mWzBg.png">
-</h1><br>
+</p><br>
 
 Select "script".
 
-<h1 align="center">
+<p align="center">
 <img src="https://miro.medium.com/max/1400/1*khszOCCaCtqZ6jM19uhpiQ.png">
-</h1><br>
+</p><br>
 
 Copy all data to config.toml file
 
