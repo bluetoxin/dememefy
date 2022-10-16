@@ -1,5 +1,6 @@
 [reddit]
 thread = "meme"
+amount = 5
 username = ""
 password = ""
 client_id = ""

@@ -1,4 +1,4 @@
-import random
+import re
 from typing import Tuple
 
 import requests
@@ -18,18 +18,19 @@ class RedditPosts(BasePosts):
         self.__password = password
         self.__token = token
         self.__client_id = client_id
+        self.__thread = thread
 
-        self.__limit = 10
-        self.__thread = f"https://oauth.reddit.com/r/{thread}/hot?limit={self.__limit}"
+        self.__feed = f"https://oauth.reddit.com/r/{thread}/hot?limit=1"
         self.__auth_headers = self.__auth()
 
     def get_post(self) -> Tuple[str, Image.Image]:
-        posts = requests.get(self.__thread, headers=self.__auth_headers).json()[
-            "data"]["children"][-self.__limit:]
-        if posts[0]["data"]["title"] is posts[0]["data"]["url"] is None:
+        posts = requests.get(self.__feed, headers=self.__auth_headers).json()["data"]["children"][-1:][0]["data"]  # noqa: E501
+        if (posts["title"] is None) or (posts["url"] is None):
             raise ValueError("Can't parse title/url in post")
-        random.shuffle(posts)
-        return (posts[0]["data"]["title"], self._download_pic(posts[0]["data"]["url"]))  # noqa: E501
+        self.__feed = f"https://oauth.reddit.com/r/{self.__thread}/hot?limit=1&after={posts['name']}"
+        if re.search(r"\.(jpeg|jpg|png)", posts["url"]) is None:
+            return self.get_post()
+        return (posts["title"], self._download_pic(posts["url"]))  # noqa: E501
 
     def __auth(self) -> dict:
         auth = requests.auth.HTTPBasicAuth(self.__client_id, self.__token)

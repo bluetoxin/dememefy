@@ -1,6 +1,6 @@
 __pycache__/
 .vscode/
-.env.toml
+config.toml
 .DS_Store
 first
 a.py
