@@ -1,3 +1,4 @@
+import os
 from dataclasses import dataclass
 
 from PIL import Image, ImageDraw, ImageFont
@@ -15,7 +16,8 @@ class Text:
         self.__font = font
 
     def draw(self, image: Image.Image, text: str):
-        font_path = f"./fonts/{self.__font.font_filename}"
+        font_path = os.path.join(os.path.dirname(
+            __file__), "fonts", self.__font.font_filename)
         draw = ImageDraw.Draw(image)
         text_font = ImageFont.truetype(font_path, self.__font.size)
         text_width = text_font.getsize(text)[0]
